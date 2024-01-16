@@ -1,0 +1,57 @@
+{% extends 'hospital/homebase.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+  <div class="jumbotron">
+    <h1 class="display-4 text-center">Contact Us</h1>
+    <p class="lead text-center">Feel free to reach out to us for any inquiries or assistance.</p>
+    <hr class="my-4">
+
+    <div class="row">
+      <div class="col-md-6">
+        <h2>Our Location</h2>
+        <p>123 Hospital Street </p>
+        <p>Mumbai, Maharashtra</p>
+      </div>
+      <div class="col-md-6">
+        <h2>Contact Information</h2>
+        <p>Email: info@enethospital.com</p>
+        <p>Phone: +91 (079) 456-7890</p>
+      </div>
+    </div>
+
+    <hr class="my-4">
+
+    <h2 class="mb-4">Contact Form</h2>
+    <form method="post">
+      {% csrf_token %}
+
+      <div class="form-group">
+        <label for="name">Your Name:</label>
+        <input type="text" class="form-control" name="name" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Your Email:</label>
+        <input type="email" class="form-control" name="email" required>
+      </div>
+
+      <div class="form-group">
+        <label for="message">Your Message:</label>
+        <textarea class="form-control" name="message" rows="4" required></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary" onclick="showAlert()">Submit Message</button>
+    </form>
+  </div>
+</div>
+<script>
+    function showAlert() {
+      alert("Your response has been recorded. Thank you!");
+      window.location.href = 'http://127.0.0.1:8000'; 
+    }
+  </script>
+  
+
+{% endblock content %}

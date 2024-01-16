@@ -1,0 +1,230 @@
+{% extends 'hospital/admin_base.html' %}
+{% load static %}
+{% block content %}
+
+<head>
+  <meta charset="utf-8">
+  <title>Enet Hospital - Invoice</title>
+
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+    }
+
+    .invoice-box {
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #eee;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+      font-size: 16px;
+      line-height: 24px;
+      color: #555;
+      background-color: #f9f9f9;
+    }
+
+    .invoice-box table {
+      width: 100%;
+      line-height: inherit;
+      text-align: left;
+    }
+
+    .invoice-box table td {
+      padding: 5px;
+      vertical-align: top;
+    }
+
+    .invoice-box table tr td:nth-child(2) {
+      text-align: right;
+    }
+
+    .invoice-box table tr.top table td {
+      padding-bottom: 10px;
+    }
+
+    .invoice-box table tr.top table td.title {
+      font-size: 30px;
+      line-height: 30px;
+      color: #3498db;
+    }
+
+    .invoice-box table tr.information table td {
+      padding-bottom: 20px;
+    }
+
+    .invoice-box table tr.heading td {
+      background: #3498db;
+      color: #fff;
+      font-weight: bold;
+    }
+
+    .invoice-box table tr.details td {
+      padding-bottom: 10px;
+    }
+
+    .invoice-box table tr.item td {
+      border-bottom: 1px solid #eee;
+    }
+
+    .invoice-box table tr.item.last td {
+      border-bottom: none;
+    }
+
+    .invoice-box table tr.total td:nth-child(2) {
+      border-top: 2px solid #eee;
+      font-weight: bold;
+    }
+
+    .input-group {
+      margin-bottom: 15px;
+    }
+
+    .rupee-symbol {
+      font-size: 18px;
+    }
+
+    .btn-primary {
+      background-color: #3498db;
+      border-color: #3498db;
+      transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+    }
+
+    .btn-primary:hover {
+      background-color: #2980b9;
+      border-color: #2980b9;
+    }
+
+    .download a {
+      display: inline-block;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      color: #fff;
+      background-color: #3498db;
+      border-radius: 5px;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    .download a:hover {
+      background-color: #2980b9;
+    }
+  </style>
+</head>
+
+<br><br><br>
+<div class="invoice-box">
+  <table cellpadding="0" cellspacing="0">
+    <tr class="top">
+      <td colspan="2">
+        <table>
+          <tr>
+            <td class="title">
+              <h1>Enet Hospital</h1>
+            </td>
+
+            <td>
+              Admit Date: {{admitDate}}<br>
+              Release Date: {{todayDate}}<br>
+              Days Spent: {{day}}
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr class="information">
+      <td colspan="2">
+        <table>
+          <tr>
+            <td>
+              Patient Name: {{name}}<br>
+              Patient Mobile: {{mobile}}<br>
+              Patient Address: {{address}}<br>
+            </td>
+
+            <td>
+              Doctor Name:<br>
+              {{assignedDoctorName}}<br>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr class="heading">
+      <td>
+        Disease and Symptoms
+      </td>
+      <td></td>
+    </tr>
+
+    <tr class="details">
+      <td>
+        {{symptoms}}
+      </td>
+    </tr>
+    
+    <tr class="heading">
+      <td>
+        Item
+      </td>
+      <td>
+        Price
+      </td>
+    </tr>
+
+    <tr class="item">
+      <td>
+        Room Charge of {{day}} Days
+      </td>
+
+      <td>
+        {{roomCharge}}
+      </td>
+    </tr>
+
+    <tr class="item">
+      <td>
+        Doctor Fee
+      </td>
+
+      <td>
+        {{doctorFee}}
+      </td>
+    </tr>
+
+    <tr class="item">
+      <td>
+        Medicine Cost
+      </td>
+
+      <td>
+        {{medicineCost}}
+      </td>
+    </tr>
+
+    <tr class="item last">
+      <td>
+        Other Charge
+      </td>
+
+      <td>
+        {{OtherCharge}}
+      </td>
+    </tr>
+
+    <tr class="total">
+      <td></td>
+
+      <td>
+        Total Rupees : {{total}}
+      </td>
+    </tr>
+
+  </table>
+</div>
+<br><br>
+<div class="download" align="center">
+  <a href="{% url 'download-pdf' patientId  %}">Download PDF</a>
+</div>
+{% endblock content %}
